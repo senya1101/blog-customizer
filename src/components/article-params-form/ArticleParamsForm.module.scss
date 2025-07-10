@@ -3,7 +3,7 @@
 	left: 0;
 	width: 616px;
 	height: 100%;
-	overflow: scroll;
+	overflow-y: scroll;
 	transform: translate(-616px);
 	transition: transform 0.5s ease;
 }
@@ -13,11 +13,12 @@
 }
 
 .form {
+	box-sizing: border-box;
 	display: flex;
 	flex-shrink: 0;
+	gap: 50px;
 	flex-direction: column;
-	box-sizing: border-box;
-	width: 616px;
+	width: 100%;
 	height: auto;
 	min-height: 100%;
 	padding: 50px 31px;
