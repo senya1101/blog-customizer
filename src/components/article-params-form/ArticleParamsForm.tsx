@@ -7,14 +7,14 @@ import { Text } from 'src/ui/text';
 import styles from './ArticleParamsForm.module.scss';
 import * as settings from '../../constants/articleProps';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { AppStateType } from 'src/index';
+import { AppStateType } from 'components/app';
 
 type ArticleParamsFormProps = {
 	onSubmit: (newState: AppStateType) => void;
 };
 
 export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const [formState, setFormState] = useState<settings.ArticleStateType>(
 		settings.defaultArticleState
@@ -43,11 +43,11 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 				!asideRef.current?.contains(event.target as HTMLElement) &&
 				document.contains(event.target as HTMLElement)
 			) {
-				setIsOpen(false);
+				setIsMenuOpen(false);
 				document.removeEventListener('click', handleClickOutside);
 			}
 		};
-		if (isOpen) {
+		if (isMenuOpen) {
 			setTimeout(
 				() => document.addEventListener('click', handleClickOutside),
 				1
@@ -57,15 +57,15 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
 		};
-	}, [isOpen]);
+	}, [isMenuOpen]);
 
 	function handleToggleSidebar() {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	}
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={handleToggleSidebar} />
+			<ArrowButton isOpen={isMenuOpen} onClick={handleToggleSidebar} />
 			<aside ref={asideRef} className={styles.container}>
 				<form
 					onSubmit={handleSubmit}
